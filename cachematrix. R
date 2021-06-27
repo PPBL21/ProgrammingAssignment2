@@ -1,0 +1,42 @@
+## Below are two functions that are used to create a
+## special object that stores a numeric vector and caches its mean.
+
+## The first function, creates a special "vector"
+##  which is really a list containing a function tomakeVector
+
+makeCacheMatrix <- function(x = matrix()) {
+
+        sam <- NULL
+        set <- function(y) {
+                x <<- y
+                sam <<- NULL
+        }
+        get <- function() x
+        setms <- function(ms) sam <<- ms
+        getms <- function() sam
+        list(set = set, get = get,
+             setms = setms,
+             getms = getms)
+}
+
+
+
+
+## first checks to see if the mean has already been calculated
+## If so, it s the mean from the cache and skips the computation. 
+
+cacheSolve <- function(x, ...) {
+
+        sam <- x$getms()
+        if(!is.null(sam)) {
+                message("cached data")
+                return(sam)
+        }
+        data <- x$get()
+        sam <- ms(data, ...)
+        x$ms(sam)
+        sam
+}
+
+        ## Return a matrix that is the inverse of 'x' :)
+
